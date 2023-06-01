@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-const EditMovieForm = (props) => {
+const AddMovieForm = (props) => {
   const { push } = useHistory();
   const { id } = useParams();
 
@@ -17,18 +17,6 @@ const EditMovieForm = (props) => {
     description: "",
   });
 
-  useEffect(() => {
-    axios
-        .get(`http://localhost:9000/api/movies/${id}`)
-        .then((res) => {
-          console.log("response", res);
-          res.data === "" ? push("/movies") : setMovie(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }, []);
-
   const handleChange = (e) => {
     setMovie({
       ...movie,
@@ -39,10 +27,10 @@ const EditMovieForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:9000/api/movies/${id}`, movie)
+      .post(`http://localhost:9000/api/movies/`, movie)
       .then((res) => {
         setMovies(res.data);
-        push(`/movies/${movie.id}`);
+        push(`/movies`);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +43,7 @@ const EditMovieForm = (props) => {
     <div className="bg-white rounded-md shadow flex-1">
       <form onSubmit={handleSubmit}>
         <div className="p-5 pb-3 border-b border-zinc-200">
-          <h4 className="text-xl font-bold">Düzenleniyor <strong>{movie.title}</strong></h4>
+          <h4 className="text-xl font-bold">Yeni Film Ekle <strong>{movie.title}</strong></h4>
         </div>
 
         <div className="px-5 py-3">
@@ -121,4 +109,4 @@ const EditMovieForm = (props) => {
   );
 };
 
-export default EditMovieForm;
+export default AddMovieForm;

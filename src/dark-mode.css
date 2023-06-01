@@ -1,0 +1,21 @@
+.mode-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    
+ }
+ .dark {
+    background-color: black;
+    color: #222222;
+    
+ }
+ .light {
+    background-color: #f5f5f5;
+    color: #222222;
+   
+ }
+
+ 
